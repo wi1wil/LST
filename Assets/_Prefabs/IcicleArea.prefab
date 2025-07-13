@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6308838389507806583}
   - component: {fileID: 3432852799900805670}
+  - component: {fileID: 1574501208769821678}
   m_Layer: 0
   m_Name: IcicleArea
   m_TagString: Untagged
@@ -77,3 +78,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.3125, y: 2.3125}
   m_EdgeRadius: 0
+--- !u!114 &1574501208769821678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245569087181082636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fbc596baf1e9a42aea74df42338a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

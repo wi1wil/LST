@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
-using System;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class PlayerMovementScript : MonoBehaviour
     private Vector2 basePosition;
 
     DashScript abilitiesScript;
-    IcicleSurge icicleSurge;
+    IcicleSurgeScript icicleSurge;
 
     void Start()
     {
@@ -31,7 +30,7 @@ public class PlayerMovementScript : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         abilitiesScript = GetComponent<DashScript>();
-        icicleSurge = GetComponent<IcicleSurge>();
+        icicleSurge = GetComponent<IcicleSurgeScript>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -42,7 +41,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
         else if (context.performed && icicleSurge.isCharging)
         {
-            Debug.Log("Movement activated, cancling charge");
+            // Debug.Log("Movement activated, cancling charge");
             icicleSurge.CancleCharge();
         }
 
@@ -53,7 +52,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if(context.performed && icicleSurge.isCharging)
         {
-            Debug.Log("Jumping activated, cancling charge");
+            // Debug.Log("Jumping activated, cancling charge");
             icicleSurge.CancleCharge();
         }
 

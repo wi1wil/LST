@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using JetBrains.Annotations;
-using System;
 
 public class DashScript : MonoBehaviour
 {
@@ -22,13 +20,13 @@ public class DashScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     PlayerMovementScript playerMovementScript;
-    IcicleSurge icicleSurge;
+    IcicleSurgeScript icicleSurge;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerMovementScript = GetComponent<PlayerMovementScript>();
-        icicleSurge = GetComponent<IcicleSurge>();
+        icicleSurge = GetComponent<IcicleSurgeScript>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -40,7 +38,7 @@ public class DashScript : MonoBehaviour
         }
         else if (context.performed && icicleSurge.isCharging)
         {
-            Debug.Log("Dash activated, cancling charge");
+            // Debug.Log("Dash activated, cancling charge");
             icicleSurge.CancleCharge();
         }
 
@@ -48,12 +46,11 @@ public class DashScript : MonoBehaviour
         if (context.performed && canDash)
         {
             StartCoroutine(StartDash());
-            hotkeyText.text = " ";
-            Debug.Log("Dash activated");
+            // Debug.Log("Dash activated");
         }
         else if (context.performed && !canDash)
         {
-            Debug.Log("Dash is on cooldown, please wait.");
+            // Debug.Log("Dash is on cooldown, please wait.");
         }
     }
 
@@ -103,6 +100,6 @@ public class DashScript : MonoBehaviour
         }
         canDash = true;
         currentDash = 0;
-        Debug.Log("Dash is ready again.");
+        // Debug.Log("Dash is ready again.");
     }
 }

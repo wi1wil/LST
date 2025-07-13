@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using UnityEngine.Animations;
-using System.Numerics;
 using System.Collections;
 
-public class IcicleSurge : MonoBehaviour
+public class IcicleSurgeScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     public CapsuleCollider2D player;
@@ -34,16 +33,22 @@ public class IcicleSurge : MonoBehaviour
 
     public void OnSurge(InputAction.CallbackContext context)
     {
+        if(context.performed && !canAttack)
+        {
+            // Debug.Log("Surge is on cooldown, please wait.");
+            return;
+        }
+
         if (context.performed && canAttack)
         {
-            Debug.Log("Surge activated");
+            // Debug.Log("Surge activated");
             StartCoroutine(StartCharge());
         }
     }
 
     IEnumerator StartCharge()
     {
-        Debug.Log("Charging surge");
+        // Debug.Log("Charging surge");
         canAttack = false;
         isCharging = true;
         yield return new WaitForSeconds(chargeTime);
@@ -52,7 +57,7 @@ public class IcicleSurge : MonoBehaviour
 
     public void CancleCharge()
     {
-        Debug.Log("Charge cancelled");
+        // Debug.Log("Charge cancelled");
         StopAllCoroutines();
         isCharging = false;
         isSurging = false;
@@ -69,13 +74,13 @@ public class IcicleSurge : MonoBehaviour
         if (facingRight)
         {
             // Offset the player's collider to the right
-            Debug.Log("Facing Right, offsetting collider to the right");
+            // Debug.Log("Facing Right, offsetting collider to the right");
             player.offset = new UnityEngine.Vector2(player.offset.x - 2f, player.offset.y);
         }
         else
         {
             // Offset the player's collider to the left
-            Debug.Log("Facing Left, offsetting collider to the left");
+            // Debug.Log("Facing Left, offsetting collider to the left");
             player.offset = new UnityEngine.Vector2(player.offset.x + 2f, player.offset.y);
         }
 
@@ -85,6 +90,8 @@ public class IcicleSurge : MonoBehaviour
 
         yield return new WaitForSeconds(0.6f);
         StartCoroutine(SpawnIcicles(spawnPos));
+        
+        StartCoroutine(StartCooldown());
 
         yield return new WaitForSeconds(surgeTime);
         StartCoroutine(StopSurge());
@@ -92,9 +99,8 @@ public class IcicleSurge : MonoBehaviour
 
     IEnumerator StopSurge()
     {
-        Debug.Log("Surge ended");
+        // Debug.Log("Surge ended");
         isSurging = false;
-        canAttack = true;
         player.offset = UnityEngine.Vector2.zero;
         yield return null;
     }
@@ -102,17 +108,23 @@ public class IcicleSurge : MonoBehaviour
 
     IEnumerator SpawnIcicles(UnityEngine.Vector2 spawnPos)
     {
-        Debug.Log("Spawning Icicles");
+        // Debug.Log("Spawning Icicles");
         GameObject icicles = Instantiate(iciclesCollider, spawnPos, UnityEngine.Quaternion.identity);
         yield return new WaitForSeconds(0.7f);
         Destroy(icicles);
-        Debug.Log("Icicles destroyed");
+        // Debug.Log("Icicles destroyed");
     }
 
     IEnumerator StartCooldown()
     {
-        // float elapsedTime = 0f;
-        yield return null;
+        float elapsedTime = 0f;
+        while (elapsedTime < cooldownTime)
+        {
+            elapsedTime += Time.deltaTime;
+            surgeCooldownDisplay.fillAmount = elapsedTime / cooldownTime;
+            yield return null;
+        }
+        canAttack = true;
     }
 
     void Update() {
