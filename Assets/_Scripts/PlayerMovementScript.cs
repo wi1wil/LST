@@ -2,12 +2,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 
-public class PlayerMovementScript : MonoBehaviour
+public class PlayerMovementScript : Entity, IDamageable
 {
     public float speed = 5f;
     public float jumpForce = 1.5f;
     public float jumpTimer = 0f;
     public float jumpDuration = 0.5f;
+
+    // private int maxHealth = 100;
+    public int currentHealth { get; set; }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            // Handle player death
+            Debug.Log("Player has died.");
+            // You can add more logic here, like playing a death animation or respawning.
+        }
+    }
+
     public float jumpHeight = 0f;
     public float maxJump = 2;
     public float currentJump = 0;

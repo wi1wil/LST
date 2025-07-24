@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Archer_Idle_0
+      m_Hash: 569889868
+      m_Sprite: {fileID: -29061298, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -29061298, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    - m_Name: Archer_Idle_1
+      m_Hash: 384885978
+      m_Sprite: {fileID: -1244321413, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1244321413, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    - m_Name: Archer_Idle_2
+      m_Hash: 268023136
+      m_Sprite: {fileID: -242593441, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -242593441, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    - m_Name: Archer_Idle_3
+      m_Hash: 956204534
+      m_Sprite: {fileID: 124929172, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 124929172, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    - m_Name: Archer_Idle_4
+      m_Hash: 647630933
+      m_Sprite: {fileID: 295737728, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 295737728, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    - m_Name: Archer_Idle_5
+      m_Hash: 295510211
+      m_Sprite: {fileID: 366921631, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 366921631, guid: b42c406ede0bebf4a9d94da3738586f9, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 6
+  - m_Name: Run
+    m_Hash: 675013152
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Archer_Run_0
+      m_Hash: 848545002
+      m_Sprite: {fileID: -1858654004, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1858654004, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+    - m_Name: Archer_Run_1
+      m_Hash: 93647996
+      m_Sprite: {fileID: -2117582139, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2117582139, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+    - m_Name: Archer_Run_2
+      m_Hash: 480093638
+      m_Sprite: {fileID: 1512487244, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1512487244, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+    - m_Name: Archer_Run_3
+      m_Hash: 731551056
+      m_Sprite: {fileID: -515505604, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -515505604, guid: e7545e4ae1487cc40bab0ecbf00eb580, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Archer_Shoot_0
+      m_Hash: 22831720
+      m_Sprite: {fileID: 1132128588, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1132128588, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_1
+      m_Hash: 911954686
+      m_Sprite: {fileID: 1493817393, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1493817393, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_2
+      m_Hash: 793903940
+      m_Sprite: {fileID: 570326959, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 570326959, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_3
+      m_Hash: 408237010
+      m_Sprite: {fileID: -66125602, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -66125602, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_4
+      m_Hash: 103917169
+      m_Sprite: {fileID: 1590172090, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1590172090, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_5
+      m_Hash: 825661159
+      m_Sprite: {fileID: -450662104, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -450662104, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_6
+      m_Hash: 675268445
+      m_Sprite: {fileID: -1351661568, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1351661568, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    - m_Name: Archer_Shoot_7
+      m_Hash: 523827147
+      m_Sprite: {fileID: -1397693285, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1397693285, guid: 8fe9886b58759854092312b55af9721b, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 8
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638882308091595562
+  m_Version: 1

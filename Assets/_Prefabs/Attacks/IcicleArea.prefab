@@ -90,3 +90,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fbc596baf1e9a42aea74df42338a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icicleParticlePrefab: {fileID: 4635083455677957829, guid: 649d6e3d32b939a48b6d8161bc58e549, type: 3}
+  damage: 25
