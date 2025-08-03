@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1470456875, guid: cafe5663cc593e04faf0d51013311d15, type: 3}
+  m_Sprite: {fileID: -764040717, guid: 965597b2b7ac4724c9764d9ac0a4c969, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -333,10 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  range: 7.5
+  detectionRange: 7.5
   topPoint: {fileID: 0}
   isShooting: 0
   shootingCooldown: 1
-  shootingRange: 15
-  arrowPrefab: {fileID: 0}
+  chaseRange: 15
+  arrowPrefab: {fileID: 6945700705820060068, guid: 774cef866a85927489b63dff1659e23f, type: 3}
   healthBar: {fileID: 7630392955859486797}
