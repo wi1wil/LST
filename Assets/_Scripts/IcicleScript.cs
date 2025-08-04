@@ -15,7 +15,7 @@ public class IcicleScript : MonoBehaviour
             Vector2 enemyPos = collision.transform.position;
             Destroy(Instantiate(icicleParticlePrefab, enemyPos, Quaternion.identity), 2f);
             Debug.Log("Icicle hit enemy at position: " + enemyPos);
-            damageable.TakeDamage(damage); // Adjust damage value as needed
+            damageable.TakeDamage(damage, transform.position); // Adjust damage value as needed
         }
     }
 }

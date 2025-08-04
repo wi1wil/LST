@@ -11,7 +11,7 @@ public class PlayerMovementScript : Entity, IDamageable
 
     // private int maxHealth = 100;
     public int currentHealth { get; set; }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 hitSource)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
