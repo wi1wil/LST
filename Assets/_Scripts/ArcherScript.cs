@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
 using System.Collections;
-using System.ComponentModel.Design;
-using NavMeshPlus.Extensions;
+using System.Collections.Generic;
 using UnityEngine.AI;
-using UnityEditor.MPE;
 
 
 public class ArcherScript : Entity, IDamageable
@@ -22,14 +20,17 @@ public class ArcherScript : Entity, IDamageable
     public bool isShooting = false;
     public bool isRoaming = false;
     public bool hasRecentlyShot = false;
-
     public bool playerDetected = false;
+    public bool wayPointFound = false;
+
     public float chaseRange = 15f;
     public float detectionRange = 7.5f;
     public float avoidanceRadius = 1.5f;
 
     private float xScale;
     public Transform topPoint;
+    public Transform bottomPoint;
+    public Transform lockedTarget;
     public Vector2 spawnLocation;
     public GameObject arrowPrefab;
     public Transform healthBar;
@@ -48,11 +49,9 @@ public class ArcherScript : Entity, IDamageable
     void Awake()
     {
         GameObject top = GameObject.Find("Top");
+        GameObject bottom = GameObject.Find("Bottom");
         topPoint = top.transform;
-        if (topPoint == null)
-        {
-            Debug.LogError("Top point not found in ArcherScript.");
-        }
+        bottomPoint = bottom.transform;
     }
 
     void Start()
@@ -70,16 +69,14 @@ public class ArcherScript : Entity, IDamageable
     
     void Update()
     {
-        // Debug.Log("Player detected: " + playerDetected);
-        // Debug.Log("Target player: " + (targetPlayer != null ? targetPlayer.name : "null"));
         DetectPlayer();
         UpdateBehavior();
-        FlipSprite();
+        
 
         if (!playerDetected && !isShooting && targetPlayer == null)
         {
             roamTimer -= Time.deltaTime;
-            Debug.Log("Roam timer: " + roamTimer);
+            // Debug.Log("Roam timer: " + roamTimer);
             if (roamTimer < 0f && !isRoaming)
             {
                 StartCoroutine(InitializeRoaming());
@@ -133,7 +130,6 @@ public class ArcherScript : Entity, IDamageable
 
     IEnumerator DamageFlash()
     {
-        Debug.Log("Taking damage, flashing sprite");
         Material originalMaterial = spriteRenderer.material;
         spriteRenderer.material = flashMaterial; // Use the flash material
         yield return new WaitForSeconds(0.2f);
@@ -142,14 +138,12 @@ public class ArcherScript : Entity, IDamageable
 
     IEnumerator TakeKnockback(Vector2 knockbackDirection)
     {
-        Debug.Log("Taking knockback");
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.velocity = Vector2.zero;
         rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
-        Debug.Log("Knockback finished");
     }
 
     public void DetectPlayer()
@@ -166,18 +160,18 @@ public class ArcherScript : Entity, IDamageable
                     // Player detected within range
                     targetPlayer = player.transform;
                     foundPlayer = true;
-                    break; // Stop checking after finding the first valid player
+                    break; 
                 }
                 else if (playerDetected)
                 {
                     targetPlayer = player.transform;
                     foundPlayer = true;
-                    break; // Stop checking after finding the first valid player
+                    break; 
                 }
             }
             if (!foundPlayer && targetPlayer != null)
             {
-                targetPlayer = null; // Reset if no valid player found
+                targetPlayer = null; 
             }
         }
     }
@@ -200,21 +194,20 @@ public class ArcherScript : Entity, IDamageable
         if (distanceToPlayer < detectionRange && !isShooting && !hasRecentlyShot && targetPlayer != null)
         {
             animator.SetBool("isChasing", false);
-            Debug.Log("Setting Player Detected to " + playerDetected);
             agent.isStopped = true;
             playerDetected = true;
-            // Debug.Log("Shooting player");
             hasRecentlyShot = true;
-            StartCoroutine(ShootArrow());
+            StartCoroutine(ShootArrow(targetPlayer));
         }
         // 2. If already detected, chase if still in chase range
         else if (playerDetected && distanceToPlayer <= chaseRange && !isShooting)
         {
             agent.isStopped = false;
-            agent.SetDestination(topPoint.position);
-            animator.SetBool("isChasing", true);
 
-            // Add avoidance logic 
+            lockedTarget = findATarget();
+            agent.SetDestination(lockedTarget.position);
+            animator.SetBool("isChasing", true);
+            FlipSprite();
         }
         // 3. Player too far, forget
         else if (distanceToPlayer > chaseRange)
@@ -222,6 +215,7 @@ public class ArcherScript : Entity, IDamageable
             animator.SetBool("isChasing", false);
             targetPlayer = null;
             playerDetected = false;
+            wayPointFound = false;
         }
         else if (targetPlayer == null)
         {
@@ -229,15 +223,40 @@ public class ArcherScript : Entity, IDamageable
         }
     }
 
-    IEnumerator ShootArrow()
+    Transform findATarget()
+    {
+        if (wayPointFound) return lockedTarget;
+        int randomNum = Random.Range(1, 4);
+        switch (randomNum)
+        {
+            case 1:
+                lockedTarget = targetPlayer;
+                break;
+            case 2:
+                lockedTarget = topPoint;
+                break;
+            case 3:
+                lockedTarget = bottomPoint;
+                break;
+        }
+
+        wayPointFound = true;
+        return lockedTarget;
+    }
+
+    IEnumerator ShootArrow(Transform target)
     {
         isShooting = true;
         FlipSprite();
         animator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.5f); // Wait for the shooting animation to finish
+
         GameObject arrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
+        ArrowScript arrowScript = arrow.GetComponent<ArrowScript>();
+        arrowScript.Initialize(target.position);
+        arrowScript.Shoot();
+
         yield return new WaitForSeconds(shootingCooldown);
-        // Debug.Log("Arrow shot!");
         animator.SetBool("isAttacking", false);
         yield return new WaitForSeconds(0.5f);
         isShooting = false;
@@ -257,10 +276,11 @@ public class ArcherScript : Entity, IDamageable
             agent.isStopped = false;
             animator.SetBool("isChasing", true);
             agent.SetDestination(hit.position);
+            FlipSprite();
 
-            while (Vector2.Distance(transform.position, hit.position) > 0.5f)
+            while (Vector2.Distance(transform.position, hit.position) > 0.1f)
             {
-                yield return null; // Wait until the agent reaches the new position
+                yield return null;
             }
 
             agent.isStopped = true;
@@ -277,9 +297,14 @@ public class ArcherScript : Entity, IDamageable
         yield return new WaitForSeconds(roamingCooldown);
     }
 
+    // IEnumerator InitializeReposition()
+    // {
+
+    // }
+
     void FlipSprite()
     {
-        if (agent.isStopped)
+        if (isShooting)
         {
             if (targetPlayer == null) return;
             if (targetPlayer.position.x > transform.position.x)

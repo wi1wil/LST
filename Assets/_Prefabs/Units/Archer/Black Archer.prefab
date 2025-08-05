@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -764040717, guid: 965597b2b7ac4724c9764d9ac0a4c969, type: 3}
+  m_Sprite: {fileID: -1470456875, guid: cafe5663cc593e04faf0d51013311d15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -334,20 +334,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  detectionRange: 7.5
-  topPoint: {fileID: 0}
-  targetPlayer: {fileID: 0}
+  knockbackForce: 5
+  shootingCooldown: 1
   isChasing: 0
   isShooting: 0
+  isRoaming: 0
+  hasRecentlyShot: 0
   playerDetected: 0
-  shootingCooldown: 1
+  wayPointFound: 0
   chaseRange: 15
+  detectionRange: 7.5
+  avoidanceRadius: 1.5
+  topPoint: {fileID: 0}
+  bottomPoint: {fileID: 0}
+  lockedTarget: {fileID: 0}
   spawnLocation: {x: 0, y: 0}
   arrowPrefab: {fileID: 6945700705820060068, guid: 774cef866a85927489b63dff1659e23f, type: 3}
   healthBar: {fileID: 7630392955859486797}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  flashMaterial: {fileID: 0}
+  targetPlayer: {fileID: 0}
 --- !u!195 &1901900005238981083
 NavMeshAgent:
   m_ObjectHideFlags: 0
