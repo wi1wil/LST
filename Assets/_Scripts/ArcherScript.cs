@@ -25,7 +25,6 @@ public class ArcherScript : Entity, IDamageable
 
     public float chaseRange = 15f;
     public float detectionRange = 7.5f;
-    public float avoidanceRadius = 1.5f;
 
     private float xScale;
     public Transform topPoint;
@@ -252,9 +251,9 @@ public class ArcherScript : Entity, IDamageable
         yield return new WaitForSeconds(0.5f); // Wait for the shooting animation to finish
 
         GameObject arrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
-        ArrowScript arrowScript = arrow.GetComponent<ArrowScript>();
-        arrowScript.Initialize(target.position);
-        arrowScript.Shoot();
+        ArrowScript arrowScript = arrow.GetComponent<ArrowScript>();        
+        Vector3 archerPos = transform.position;
+        arrowScript.Shoot(target.position, archerPos);
 
         yield return new WaitForSeconds(shootingCooldown);
         animator.SetBool("isAttacking", false);

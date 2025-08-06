@@ -1,15 +1,20 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using System.Collections;
 
 public class ArrowScript : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed;
-    public int damage = 2; // Adjust the damage value as needed
+    public float relativeHeight;
+    public int damage = 2;
     Vector3 target;
 
+    private Vector3 arrowStartPos;
+    private Vector3 arrowEndPos;
+    private Vector3 arrowRange;
+
     SpriteRenderer spriteRenderer;
+    [SerializeField] AnimationCurve animationCurve;
 
     void Awake()
     {
@@ -17,19 +22,35 @@ public class ArrowScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Shoot()
+    void Update()
     {
-        Vector3 direction = (target - transform.position).normalized;
-        rb.velocity = direction * speed;
+        UpdateArrowPos();
+    }
 
-        if (target.x < transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (target.x > transform.position.x)
-        {
-            spriteRenderer.flipX = false;
-        }
+    public void Shoot(Vector3 target, Vector3 archerPos)
+    {
+        this.target = target;
+        arrowStartPos = archerPos;
+        arrowStartPos.z = 0f;
+        arrowEndPos = target;
+
+        float distance = target.x - arrowStartPos.x;
+        this.relativeHeight = Mathf.Abs(distance) * relativeHeight;
+
+        arrowRange = arrowEndPos - arrowStartPos;
+
+        FlipSprite();
+    }
+
+    void UpdateArrowPos()
+    {
+        float nextPosX = transform.position.x + speed * Time.deltaTime;
+        float progress = (nextPosX - arrowStartPos.x) / arrowRange.x;
+        float curveY = animationCurve.Evaluate(progress);
+        float nextPosY = arrowStartPos.y + curveY * relativeHeight;
+
+        Vector3 newPos = new Vector3(nextPosX, nextPosY, 0f);
+        transform.position = newPos;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -51,8 +72,15 @@ public class ArrowScript : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector3 target)
+    void FlipSprite()
     {
-        this.target = target;
+        if (target.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (target.x > transform.position.x)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 }
