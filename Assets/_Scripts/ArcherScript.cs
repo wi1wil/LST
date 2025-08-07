@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using System.Threading;
 
 
 public class ArcherScript : Entity, IDamageable
@@ -25,10 +26,14 @@ public class ArcherScript : Entity, IDamageable
 
     public float chaseRange = 15f;
     public float detectionRange = 7.5f;
+    public float avoidanceRange = 2.5f;
+    public float avoidanceForce = 2f;
 
     private float xScale;
     public Transform topPoint;
     public Transform bottomPoint;
+    public Transform leftPoint;
+    public Transform rightPoint;
     public Transform lockedTarget;
     public Vector2 spawnLocation;
     public GameObject arrowPrefab;
@@ -49,8 +54,13 @@ public class ArcherScript : Entity, IDamageable
     {
         GameObject top = GameObject.Find("Top");
         GameObject bottom = GameObject.Find("Bottom");
+        GameObject left = GameObject.Find("Left");
+        GameObject right = GameObject.Find("Right");
+
         topPoint = top.transform;
         bottomPoint = bottom.transform;
+        leftPoint = left.transform;
+        rightPoint = right.transform;
     }
 
     void Start()
@@ -89,6 +99,9 @@ public class ArcherScript : Entity, IDamageable
         Gizmos.DrawWireSphere(transform.position, detectionRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, avoidanceRange);
 
         if (targetPlayer != null)
         {
@@ -178,7 +191,7 @@ public class ArcherScript : Entity, IDamageable
     public bool LineOfSight(Transform target)
     {
         obstacleLayer = LayerMask.GetMask("Obstacle");
-       
+
         Vector2 origin = transform.position;
         Vector2 direction = (Vector2)target.position - origin;
         float distance = Vector2.Distance(origin, target.position);
@@ -187,8 +200,10 @@ public class ArcherScript : Entity, IDamageable
     }
 
     void UpdateBehavior()
-    {
-        float distanceToPlayer = Vector2.Distance(transform.position, topPoint.position);
+    {        
+        lockedTarget = findATarget();
+
+        float distanceToPlayer = Vector2.Distance(transform.position, lockedTarget.position);
         // 1. Stop and shoot if close enough
         if (distanceToPlayer < detectionRange && !isShooting && !hasRecentlyShot && targetPlayer != null)
         {
@@ -202,8 +217,6 @@ public class ArcherScript : Entity, IDamageable
         else if (playerDetected && distanceToPlayer <= chaseRange && !isShooting)
         {
             agent.isStopped = false;
-
-            lockedTarget = findATarget();
             agent.SetDestination(lockedTarget.position);
             animator.SetBool("isChasing", true);
             FlipSprite();
@@ -225,20 +238,25 @@ public class ArcherScript : Entity, IDamageable
     Transform findATarget()
     {
         if (wayPointFound) return lockedTarget;
-        int randomNum = Random.Range(1, 4);
+
+        int randomNum = Random.Range(1, 5);
         switch (randomNum)
         {
             case 1:
-                lockedTarget = targetPlayer;
+                lockedTarget = bottomPoint;
                 break;
             case 2:
-                lockedTarget = topPoint;
+                lockedTarget = leftPoint;
                 break;
             case 3:
-                lockedTarget = bottomPoint;
+                lockedTarget = rightPoint;
+                break;
+            case 4:
+                lockedTarget = topPoint;
                 break;
         }
 
+        Debug.Log("Locked target: " + lockedTarget.name);
         wayPointFound = true;
         return lockedTarget;
     }
@@ -295,11 +313,6 @@ public class ArcherScript : Entity, IDamageable
         roamTimer = roamingCooldown; // Reset the roam timer
         yield return new WaitForSeconds(roamingCooldown);
     }
-
-    // IEnumerator InitializeReposition()
-    // {
-
-    // }
 
     void FlipSprite()
     {
