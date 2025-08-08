@@ -93,26 +93,26 @@ public class ArcherScript : Entity, IDamageable
         }
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
+    // void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.black;
+    //     Gizmos.DrawWireSphere(transform.position, detectionRange);
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawWireSphere(transform.position, chaseRange);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, avoidanceRange);
+    //     Gizmos.color = Color.blue;
+    //     Gizmos.DrawWireSphere(transform.position, avoidanceRange);
 
-        if (targetPlayer != null)
-        {
-            Vector3 origin = transform.position;
-            Vector3 target = targetPlayer.position;
-            bool clear = LineOfSight(targetPlayer);
+    //     if (targetPlayer != null)
+    //     {
+    //         Vector3 origin = transform.position;
+    //         Vector3 target = targetPlayer.position;
+    //         bool clear = LineOfSight(targetPlayer);
 
-            Gizmos.color = clear ? Color.green : Color.yellow;
-            Gizmos.DrawLine(origin, target);
-        }
-    }
+    //         Gizmos.color = clear ? Color.green : Color.yellow;
+    //         Gizmos.DrawLine(origin, target);
+    //     }
+    // }
 
     public void TakeDamage(int damage, Vector3 hitSource)
     {
@@ -169,7 +169,11 @@ public class ArcherScript : Entity, IDamageable
             {
                 if (LineOfSight(player.transform))
                 {
+                    float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
                     // Player detected within range
+                    if(distanceToPlayer > detectionRange)
+                        return;
+
                     targetPlayer = player.transform;
                     foundPlayer = true;
                     break; 
@@ -293,10 +297,10 @@ public class ArcherScript : Entity, IDamageable
             agent.isStopped = false;
             animator.SetBool("isChasing", true);
             agent.SetDestination(hit.position);
-            FlipSprite();
 
             while (Vector2.Distance(transform.position, hit.position) > 0.1f)
             {
+                FlipSprite();
                 yield return null;
             }
 
@@ -306,7 +310,8 @@ public class ArcherScript : Entity, IDamageable
         // Failed to find a valid position, stop roaming
         else
         {
-            Debug.LogWarning("Failed to find a valid position for roaming");
+            // Debug.LogWarning("Failed to find a valid position for roaming");
+            InitializeRoaming();
         }
 
         isRoaming = false;

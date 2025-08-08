@@ -28,4 +28,14 @@ public class AddNavModToChildScript : MonoBehaviour
             surface.BuildNavMesh();
         }
     }
+
+    [MenuItem("Tools/Add Build NavMesh")]
+    private static void AddBuildNavMesh()
+    {
+        var surface = GameObject.FindObjectOfType<NavMeshSurface>();
+        if (surface != null)
+        {
+            surface.BuildNavMesh();
+        }
+    }
 }
