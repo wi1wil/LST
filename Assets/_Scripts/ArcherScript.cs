@@ -260,7 +260,7 @@ public class ArcherScript : Entity, IDamageable
                 break;
         }
 
-        Debug.Log("Locked target: " + lockedTarget.name);
+        // Debug.Log("Locked target: " + lockedTarget.name);
         wayPointFound = true;
         return lockedTarget;
     }
