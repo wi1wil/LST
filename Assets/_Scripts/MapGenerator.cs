@@ -3,12 +3,19 @@ using UnityEngine.Tilemaps;
 using Cinemachine;
 using System.Collections.Generic;
 using System;
-using System.Security.Cryptography;
+using UnityEngine.UI;
+using TMPro;
+using NavMeshPlus.Components;
+using UnityEditor.EditorTools;
 
 public class MapGenerator : MonoBehaviour
 {
     public CinemachineConfiner2D confiner;
     public PolygonCollider2D cameraBounds;
+
+    public Slider scaleSlider;
+    public Slider sizeSlider;
+    public TMP_InputField desiredSeed;
 
     [Range(0.01f, 1f)]
     public float scale;
@@ -32,6 +39,7 @@ public class MapGenerator : MonoBehaviour
     public TileBase borderTile;
 
     public Tile[] tiles;
+    public GameObject[] environments;
     public enum TileType
     {
         None,
@@ -51,6 +59,14 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
+        scaleSlider.value = 0.066f;
+        scaleSlider.minValue = 0.001f;
+        scaleSlider.maxValue = 1f;
+
+        sizeSlider.value = 100f;
+        sizeSlider.minValue = 100f;
+        sizeSlider.maxValue = 1000f;
+
         System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
         randomY = prng.Next(0, 10000);
@@ -59,6 +75,40 @@ public class MapGenerator : MonoBehaviour
         halfH = height / 2;
 
         CreateTuple();
+    }
+
+    void OnEnable()
+    {
+        sizeSlider.onValueChanged.AddListener(ChangeSize);
+        ChangeSize(sizeSlider.value);
+
+        scaleSlider.onValueChanged.AddListener(ChangeScale);
+        ChangeScale(scaleSlider.value);
+
+        desiredSeed.onEndEdit.AddListener(ChangeSeed);
+        ChangeSeed(desiredSeed.text);
+    }
+
+    void OnDisable()
+    {
+        sizeSlider.onValueChanged.RemoveAllListeners();
+        scaleSlider.onValueChanged.RemoveAllListeners();
+    }
+
+    void ChangeScale(float value)
+    {
+        scale = value;
+    }
+
+    void ChangeSize(float value)
+    {
+        width = (int)value;
+        height = (int)value;
+    }
+
+    void ChangeSeed(string desiredSeed)
+    {
+        seed = desiredSeed;
     }
 
     void GenerateMap()
@@ -95,7 +145,8 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-        RefreshDisplayMap();
+        RefreshDisplayMap();        
+        AddNavModToChildScript.AddBuildNavMesh();
     }
 
     public void CreateTuple()
@@ -164,6 +215,10 @@ public class MapGenerator : MonoBehaviour
         System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
         randomY = prng.Next(0, 10000);
+
+        halfW = width / 2;
+        halfH = height / 2;
+
         UpdateCamera();
         GenerateMap();
     }
