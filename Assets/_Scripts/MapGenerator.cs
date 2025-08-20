@@ -67,7 +67,7 @@ public class MapGenerator : MonoBehaviour
         sizeSlider.minValue = 100f;
         sizeSlider.maxValue = 1000f;
 
-        desiredSeed.text = "short";
+        desiredSeed.text = "jordy";
 
         System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
@@ -216,8 +216,8 @@ public class MapGenerator : MonoBehaviour
         halfW = width / 2;
         halfH = height / 2;
 
-        UpdateCamera();
         GenerateMap();
+        UpdateCamera();
     }
 
     public void RefreshDisplayMap()
