@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Tree3_0
+      m_Hash: 752970722
+      m_Sprite: {fileID: 1929253927, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1929253927, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_1
+      m_Hash: 468081524
+      m_Sprite: {fileID: 459543966, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 459543966, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_2
+      m_Hash: 49220302
+      m_Sprite: {fileID: 733211260, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 733211260, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_3
+      m_Hash: 904411736
+      m_Sprite: {fileID: 1358472868, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1358472868, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_4
+      m_Hash: 730640379
+      m_Sprite: {fileID: -1975502919, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1975502919, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_5
+      m_Hash: 478912365
+      m_Sprite: {fileID: -716832951, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -716832951, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_6
+      m_Hash: 92458711
+      m_Sprite: {fileID: -2146901945, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2146901945, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    - m_Name: Tree3_7
+      m_Hash: 847642177
+      m_Sprite: {fileID: -1279394506, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1279394506, guid: 59b945792b30ce54991f4793d9899518, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 8
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638912991795063261
+  m_Version: 1

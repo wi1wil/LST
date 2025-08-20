@@ -67,6 +67,8 @@ public class MapGenerator : MonoBehaviour
         sizeSlider.minValue = 100f;
         sizeSlider.maxValue = 1000f;
 
+        desiredSeed.text = "short";
+
         System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
         randomY = prng.Next(0, 10000);
@@ -123,16 +125,11 @@ public class MapGenerator : MonoBehaviour
                 float value = Mathf.PerlinNoise(sampleX, sampleY);
 
                 Vector3Int coords = new Vector3Int(i, j, 0);
-                if (value < 0.3)
+                if (value < 0.6)
                 {
                     placeholderTilemap.SetTile(coords, waterTile);
                     SetDisplayTile(coords);
                 }
-                // else if (value < 0.45)
-                // {
-                //     placeholderTilemap.SetTile(coords, sandTile);
-                //     SetDisplayTile(coords);
-                // }
                 else
                 {
                     placeholderTilemap.SetTile(coords, grassTile);

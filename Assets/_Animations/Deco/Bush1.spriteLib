@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Bushe1_0
+      m_Hash: 647323447
+      m_Sprite: {fileID: 1874119052, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1874119052, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_1
+      m_Hash: 294809505
+      m_Sprite: {fileID: -577227110, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -577227110, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_2
+      m_Hash: 144391707
+      m_Sprite: {fileID: 439642945, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 439642945, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_3
+      m_Hash: 1067191949
+      m_Sprite: {fileID: -1025125505, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1025125505, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_4
+      m_Hash: 569940782
+      m_Sprite: {fileID: -865014156, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -865014156, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_5
+      m_Hash: 385854392
+      m_Sprite: {fileID: 967449722, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 967449722, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_6
+      m_Hash: 267844098
+      m_Sprite: {fileID: -315734730, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -315734730, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    - m_Name: Bushe1_7
+      m_Hash: 955370132
+      m_Sprite: {fileID: -1060707202, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1060707202, guid: 1407d7f7ac5594a43b4c8c4500166c0f, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 8
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638913026198969087
+  m_Version: 1

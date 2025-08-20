@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ebb8354eb6ee02c4dacd8354ad97e9a7
+guid: eb99a5183889d4644aa26577cbf63903
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sheep_Idle_0
+      name: Bushe4_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb2363b987e3faf41bf04f2c67bfc39f
-      internalID: 1795221392
+      spriteID: 20126e33f1f13394b83efbc6a6cf14e0
+      internalID: 808885160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_Idle_1
+      name: Bushe4_1
       rect:
         serializedVersion: 2
         x: 128
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b8930be123a4db4782aa1bb2f011322
-      internalID: 786685093
+      spriteID: 6034c8cac14889a48b09c1f3c0faa90a
+      internalID: 430315110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_Idle_2
+      name: Bushe4_2
       rect:
         serializedVersion: 2
         x: 256
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 087fe3f6d5298c9409ab1a514c11abc4
-      internalID: -273511599
+      spriteID: 229738096056a084991c8ddec44eaef1
+      internalID: -2069605667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_Idle_3
+      name: Bushe4_3
       rect:
         serializedVersion: 2
         x: 384
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 659fac973cfb76e4c916396cbd23825f
-      internalID: 638301946
+      spriteID: a2a12e52d701b8b43b5820cdb207a384
+      internalID: -127435189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_Idle_4
+      name: Bushe4_4
       rect:
         serializedVersion: 2
         x: 512
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a74eb9f1807fadf49a86b15de976ca70
-      internalID: 1172477825
+      spriteID: d5111740923802f4a987c8e8228b6fbf
+      internalID: -1530402592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sheep_Idle_5
+      name: Bushe4_5
       rect:
         serializedVersion: 2
         x: 640
@@ -242,8 +242,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a8908033a25b2c4bab59ff02a605d77
-      internalID: -1784632426
+      spriteID: 729e25951db486d4f94bf28c207a4801
+      internalID: 1151402139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bushe4_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d735a3fe1ad75f64d811875a63cea3e3
+      internalID: -1019108057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bushe4_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46c9d83742dc00489827b0fe6a73bdc
+      internalID: -1242069486
       vertices: []
       indices: 
       edges: []
@@ -259,12 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sheep_Idle_0: 1795221392
-      Sheep_Idle_1: 786685093
-      Sheep_Idle_2: -273511599
-      Sheep_Idle_3: 638301946
-      Sheep_Idle_4: 1172477825
-      Sheep_Idle_5: -1784632426
+      Bushe4_0: 808885160
+      Bushe4_1: 430315110
+      Bushe4_2: -2069605667
+      Bushe4_3: -127435189
+      Bushe4_4: -1530402592
+      Bushe4_5: 1151402139
+      Bushe4_6: -1019108057
+      Bushe4_7: -1242069486
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
