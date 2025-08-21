@@ -2099,8 +2099,7 @@ MonoBehaviour:
   colliderTilemap: {fileID: 459326336}
   grassTile: {fileID: 11400000, guid: da1f0220dd35f494d8554ecf36651687, type: 2}
   waterTile: {fileID: 11400000, guid: 582244db4efe52c4fa78e73b7806865e, type: 2}
-  sandTile: {fileID: 0}
-  borderTile: {fileID: 11400000, guid: 053413bdb013a6a409c9074d18ad8821, type: 2}
+  borderTile: {fileID: 11400000, guid: 34450665fe35a4a4691a0eba018710e2, type: 2}
   tiles:
   - {fileID: 11400000, guid: dfbe86486f83b694780cff2182d3117a, type: 2}
   - {fileID: 11400000, guid: a69070fba2bcb754996f88bf04cf5550, type: 2}
@@ -2118,7 +2117,33 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a4f10079107a0241880a6b6d3a08c4d, type: 2}
   - {fileID: 11400000, guid: 881904fdaee527b4a9c43c944f35696d, type: 2}
   - {fileID: 11400000, guid: a3650d6ce205b8d45b1d85861ca17501, type: 2}
-  environments: []
+  parentEnv: {fileID: 1351920761}
+  environment:
+  - name: Trees
+    total: 20
+    prefabs:
+    - {fileID: 7277059619543895017, guid: f632b9d3ea4f1e147bc5168efb65be80, type: 3}
+    - {fileID: 3049936187365009884, guid: 2c85512c0d55f7e429a389ffef15dd24, type: 3}
+    - {fileID: 4245404165596459352, guid: 923c98f544fa76948871105a17e4f620, type: 3}
+    - {fileID: 2370222350182266201, guid: 808a3f9a8bcf931479b72acd1a12b803, type: 3}
+  - name: Bushes
+    total: 20
+    prefabs:
+    - {fileID: 6653157190931786148, guid: 7bf43075d06ec12449161d62e1176556, type: 3}
+    - {fileID: 2974912647437001006, guid: 6197a7c0f8cf73c459264e726b1d086a, type: 3}
+    - {fileID: 9210151788346466558, guid: 004749e8a6b7c03438313bb588dd84b5, type: 3}
+    - {fileID: 7445104370246887630, guid: 0ac0485b11cff4444b4d3e47756404ac, type: 3}
+  - name: Stones
+    total: 20
+    prefabs:
+    - {fileID: 2051577692843372798, guid: c8b3927a6089e4c49ac1b9cc01110301, type: 3}
+    - {fileID: 4601515211803195736, guid: b5c7f94d294ea81459e54180015b81e7, type: 3}
+    - {fileID: 4947834683658141057, guid: c7f59c18f4acff34eb4575c15bb39df1, type: 3}
+    - {fileID: 5875401420826382348, guid: 0e004a231ad43e84b9a42fe0427e36da, type: 3}
+  - name: Sheeps
+    total: 0
+    prefabs:
+    - {fileID: 7055999120679075208, guid: 91d9f7eedd9efed4e99f74c50eb2820e, type: 3}
 --- !u!1 &761243325
 GameObject:
   m_ObjectHideFlags: 3
@@ -48199,10 +48224,10 @@ MonoBehaviour:
   m_TileModifiers:
   - tile: {fileID: 11400000, guid: da1f0220dd35f494d8554ecf36651687, type: 2}
     overrideArea: 1
-    area: 3
+    area: 0
   - tile: {fileID: 11400000, guid: 582244db4efe52c4fa78e73b7806865e, type: 2}
     overrideArea: 1
-    area: 0
+    area: 3
   - tile: {fileID: 11400000, guid: 34450665fe35a4a4691a0eba018710e2, type: 2}
     overrideArea: 1
     area: 1

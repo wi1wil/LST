@@ -5,7 +5,7 @@ using NavMeshPlus.Components;
 public class AddNavModToChildScript : MonoBehaviour
 {
     [MenuItem("Tools/Add NavMeshModifier to Children")]
-    private static void AddModifiersToEnvironment()
+    public static void AddModifiersToEnvironment()
     {
         GameObject environment = GameObject.Find("Environment");
         if (environment == null) return;
@@ -32,7 +32,6 @@ public class AddNavModToChildScript : MonoBehaviour
     [MenuItem("Tools/Add Build NavMesh")]
     public static void AddBuildNavMesh()
     {
-        Debug.Log("Updating Nav Mesh");
         var surface = GameObject.FindObjectOfType<NavMeshSurface>();
         if (surface != null)
         {

@@ -24,8 +24,8 @@ public class ArcherScript : Entity, IDamageable
     public bool playerDetected = false;
     public bool wayPointFound = false;
 
-    public float chaseRange = 15f;
-    public float detectionRange = 7.5f;
+    public float chaseRange = 25f;
+    public float detectionRange = 10f;
     public float avoidanceRange = 2.5f;
     public float avoidanceForce = 2f;
 

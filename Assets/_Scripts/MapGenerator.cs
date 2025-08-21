@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using TMPro;
-using NavMeshPlus.Components;
-using UnityEditor.EditorTools;
+using System.Runtime.ExceptionServices;
 
 public class MapGenerator : MonoBehaviour
 {
+    [Header("Camera Bounds")]
     public CinemachineConfiner2D confiner;
     public PolygonCollider2D cameraBounds;
 
+    [Header("Generate Map Bounds")]
     public Slider scaleSlider;
     public Slider sizeSlider;
     public TMP_InputField desiredSeed;
@@ -29,23 +30,38 @@ public class MapGenerator : MonoBehaviour
     float randomX;
     float randomY;
 
+    [Header("Tilemaps")]
     public Tilemap placeholderTilemap;
     public Tilemap displayTilemap;
     public Tilemap colliderTilemap;
 
+    [Header("Tiles")]
     public TileBase grassTile;
     public TileBase waterTile;
-    public TileBase sandTile;
     public TileBase borderTile;
 
+    [Header("Assign")]
     public Tile[] tiles;
-    public GameObject[] environments;
+    public GameObject parentEnv;
+
+    System.Random prng;
+
     public enum TileType
     {
         None,
         Grass,
-        Dirt
+        Water
     }
+
+    [System.Serializable]
+    public class EnvType
+    {
+        public string name;
+        public int total;
+        public GameObject[] prefabs;
+    }
+
+    public EnvType[] environment;
 
     protected static Vector3Int[] neighbours = new Vector3Int[]
     {
@@ -69,7 +85,7 @@ public class MapGenerator : MonoBehaviour
 
         desiredSeed.text = "jordy";
 
-        System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
+        prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
         randomY = prng.Next(0, 10000);
 
@@ -125,7 +141,7 @@ public class MapGenerator : MonoBehaviour
                 float value = Mathf.PerlinNoise(sampleX, sampleY);
 
                 Vector3Int coords = new Vector3Int(i, j, 0);
-                if (value < 0.6)
+                if (value < 0.4)
                 {
                     placeholderTilemap.SetTile(coords, waterTile);
                     SetDisplayTile(coords);
@@ -146,31 +162,110 @@ public class MapGenerator : MonoBehaviour
         AddNavModToChildScript.AddBuildNavMesh();
     }
 
+    public void GenerateEnvironment()
+    {
+        int currentEnv = 0;
+
+        for (int i = 0; i < environment.Length; i++)
+        {
+            EnvType env = environment[currentEnv];
+            for (int j = 0; j < env.total; j++)
+            {
+                GameObject prefabToSpawn = null;
+                if (env.prefabs.Length > 1)
+                {
+                    prefabToSpawn = env.prefabs[prng.Next(0, env.prefabs.Length)];
+                }
+                else
+                {
+                    prefabToSpawn = env.prefabs[0];
+                }
+
+                if (prefabToSpawn != null)
+                {
+                    Instantiate(prefabToSpawn, RandomSpawnPos(), Quaternion.identity, parentEnv.transform);
+                }
+            }
+            if (currentEnv < environment.Length)
+            {
+                currentEnv++;
+            }
+            else if (currentEnv == environment.Length)
+            {
+                currentEnv = 0;
+            }
+        }
+        AddNavModToChildScript.AddModifiersToEnvironment();
+    }
+
+    Vector3 RandomSpawnPos()
+    {
+        int max = 100;
+        for (int i = 0; i < max; i++)
+        {
+            float randomPosX = prng.Next(-(halfW - 1), halfW - 1);
+            float randomPosY = prng.Next(-(halfW - 1), halfW - 1);
+            Vector3 randomPos = new Vector3(randomPosX + 0.5f, randomPosY + 0.5f, 0);
+
+            if (validateSurrounding(randomPos))
+            {
+                return randomPos;
+            }
+            else
+            {
+                Debug.Log("Not Valid");
+            }
+        }
+        return Vector3.zero;
+    }
+
+    bool validateSurrounding(Vector3 pos)
+    {
+        Vector3Int cell = placeholderTilemap.WorldToCell(pos);
+        Vector3Int[] directions = new Vector3Int[]
+        {
+            cell,
+            cell + new Vector3Int(1, 0, 0),
+            cell + new Vector3Int(0, 1, 0),
+            cell + new Vector3Int(1, 1, 0)
+        };
+
+        foreach (var dir in directions)
+        {
+            TileBase tile = placeholderTilemap.GetTile(dir);
+            if (tile == borderTile || tile == waterTile)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void CreateTuple()
     {
         neighbourTupleToTile = new()
         {
-            {new (TileType.Grass, TileType.Grass, TileType.Grass, TileType.Grass), tiles[6]}, // Full Grass
+            {new (TileType.Grass, TileType.Grass, TileType.Grass, TileType.Grass), tiles[12]}, // Full Grass
 
-            {new (TileType.Dirt, TileType.Dirt, TileType.Dirt, TileType.Grass), tiles[13]}, // Outer Bottom Right
-            {new (TileType.Dirt, TileType.Dirt, TileType.Grass, TileType.Dirt), tiles[0]}, // Outer Bottom Left
-            {new (TileType.Dirt, TileType.Grass, TileType.Dirt, TileType.Dirt), tiles[8]}, // Outer Top RIght
-            {new (TileType.Grass, TileType.Dirt, TileType.Dirt, TileType.Dirt), tiles[15]}, // Outer Top Left
+            {new (TileType.Water, TileType.Water, TileType.Water, TileType.Grass), tiles[7]}, // Outer Bottom Right
+            {new (TileType.Water, TileType.Water, TileType.Grass, TileType.Water), tiles[10]}, // Outer Bottom Left
+            {new (TileType.Water, TileType.Grass, TileType.Water, TileType.Water), tiles[2]}, // Outer Top RIght
+            {new (TileType.Grass, TileType.Water, TileType.Water, TileType.Water), tiles[5]}, // Outer Top Left
 
-            {new (TileType.Dirt, TileType.Grass, TileType.Dirt, TileType.Grass), tiles[1]}, // Edge Right
-            {new (TileType.Grass, TileType.Dirt, TileType.Grass, TileType.Dirt), tiles[11]}, // Edge Left
-            {new (TileType.Dirt, TileType.Dirt, TileType.Grass, TileType.Grass), tiles[3]}, // Edge Bottom
-            {new (TileType.Grass, TileType.Grass, TileType.Dirt, TileType.Dirt), tiles[9]}, // Edge Top
+            {new (TileType.Water, TileType.Grass, TileType.Water, TileType.Grass), tiles[11]}, // Edge Right
+            {new (TileType.Grass, TileType.Water, TileType.Grass, TileType.Water), tiles[1]}, // Edge Left
+            {new (TileType.Water, TileType.Water, TileType.Grass, TileType.Grass), tiles[9]}, // Edge Bottom
+            {new (TileType.Grass, TileType.Grass, TileType.Water, TileType.Water), tiles[3]}, // Edge Top
 
-            {new (TileType.Dirt, TileType.Grass, TileType.Grass, TileType.Grass), tiles[5]}, // Inner Bottom Right
-            {new (TileType.Grass, TileType.Dirt, TileType.Grass, TileType.Grass), tiles[2]}, // Inner Bottom left
-            {new (TileType.Grass, TileType.Grass, TileType.Dirt, TileType.Grass), tiles[10]}, // Inner Top Right
-            {new (TileType.Grass, TileType.Grass, TileType.Grass, TileType.Dirt), tiles[7]}, // Inner Top Left
+            {new (TileType.Water, TileType.Grass, TileType.Grass, TileType.Grass), tiles[15]}, // Inner Bottom Right
+            {new (TileType.Grass, TileType.Water, TileType.Grass, TileType.Grass), tiles[8]}, // Inner Bottom left
+            {new (TileType.Grass, TileType.Grass, TileType.Water, TileType.Grass), tiles[0]}, // Inner Top Right
+            {new (TileType.Grass, TileType.Grass, TileType.Grass, TileType.Water), tiles[13]}, // Inner Top Left
  
-            {new (TileType.Dirt, TileType.Grass, TileType.Grass, TileType.Dirt), tiles[14]}, // Dual Up Right
-            {new (TileType.Grass, TileType.Dirt, TileType.Dirt, TileType.Grass), tiles[4]}, // Dual Down Right
+            {new (TileType.Water, TileType.Grass, TileType.Grass, TileType.Water), tiles[4]}, // Dual Up Right
+            {new (TileType.Grass, TileType.Water, TileType.Water, TileType.Grass), tiles[14]}, // Dual Down Right
 
-            {new (TileType.Dirt, TileType.Dirt, TileType.Dirt, TileType.Dirt), tiles[12]} // Full Water
+            {new (TileType.Water, TileType.Water, TileType.Water, TileType.Water), tiles[6]} // Full Water
         };
     }
 
@@ -182,7 +277,7 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            return TileType.Dirt;
+            return TileType.Water;
         }
     }
 
@@ -209,7 +304,7 @@ public class MapGenerator : MonoBehaviour
     public void RegenerateMap()
     {
         placeholderTilemap.ClearAllTiles();
-        System.Random prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
+        prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);
         randomY = prng.Next(0, 10000);
 
@@ -217,7 +312,23 @@ public class MapGenerator : MonoBehaviour
         halfH = height / 2;
 
         GenerateMap();
+        ClearEnvironment();
+        GenerateEnvironment();
         UpdateCamera();
+    }
+
+    public void ClearEnvironment()
+    {
+        List<GameObject> children = new List<GameObject>();
+        foreach (Transform child in parentEnv.transform)
+        {
+            children.Add(child.gameObject);
+        }
+
+        foreach (GameObject child in children)
+        {
+            Destroy(child);
+        }
     }
 
     public void RefreshDisplayMap()
