@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.ExceptionServices;
 
 public class MapGenerator : MonoBehaviour
 {

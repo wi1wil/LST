@@ -1,19 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Animations;
-using System.Collections;
 
-public class PlayerMovementScript : Entity, IDamageable
+public class PlayerMovementScript : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpForce = 1.5f;
     public float jumpTimer = 0f;
     public float jumpDuration = 0.5f;
-
-    private int maxHealth = 100;
-    public int currentHealth { get; set; }
-    public Material flashMaterial;
-    public Material originalMaterial;
 
     public float jumpHeight = 0f;
     public float maxJump = 2;
@@ -33,11 +26,9 @@ public class PlayerMovementScript : Entity, IDamageable
 
     void Start()
     {
-        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = spriteRenderer.material;
         abilitiesScript = GetComponent<DashScript>();
         icicleSurge = GetComponent<IcicleSurgeScript>();
     }
@@ -137,37 +128,5 @@ public class PlayerMovementScript : Entity, IDamageable
         {
             anim.SetBool("isRunning", false);
         }
-    }
-
-    public void TakeDamage(int damage, Vector3 hitSource)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Player has died.");
-            Destroy(gameObject);
-        }
-        else
-        {
-            Vector2 knockbackDirection = (transform.position - hitSource).normalized;
-            StartCoroutine(DamageFlash());
-            StartCoroutine(TakeKnockback(knockbackDirection));
-        }
-    }
-
-    IEnumerator DamageFlash()
-    {
-        spriteRenderer.material = flashMaterial;
-        yield return new WaitForSeconds(0.2f);
-        spriteRenderer.material = originalMaterial;
-    }
-    
-    IEnumerator TakeKnockback(Vector2 knockbackDirection)
-    {
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.velocity = Vector2.zero;
-        rb.AddForce(knockbackDirection * 2f, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.2f);
-        rb.velocity = Vector2.zero;
     }
 }
