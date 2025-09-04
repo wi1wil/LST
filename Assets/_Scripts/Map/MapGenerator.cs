@@ -82,7 +82,7 @@ public class MapGenerator : MonoBehaviour
         sizeSlider.minValue = 100f;
         sizeSlider.maxValue = 1000f;
 
-        desiredSeed.text = "jordy";
+        desiredSeed.text = "lstmap";
 
         prng = new System.Random(Mathf.Abs(seed.GetHashCode()));
         randomX = prng.Next(0, 10000);

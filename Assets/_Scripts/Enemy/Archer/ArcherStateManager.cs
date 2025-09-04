@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,18 +16,13 @@ public class ArcherStateManager : MonoBehaviour
     [HideInInspector] public bool playerPointFound;
     [HideInInspector] public Transform lockedTarget;
 
+    public GameObject chaseRangeTrigger;
     public LayerMask obstacleLayer;
     public GameObject arrowPrefab;
     public float attackCooldown = 2.5f;
 
     void Awake()
     {
-        if (!playerPointFound)
-        {
-            lockedTarget = PlayerPointsManager.Instance.GetRandomPlayerPoint();
-            playerPointFound = true;
-        }
-
         spawnLocation = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -39,6 +33,7 @@ public class ArcherStateManager : MonoBehaviour
 
     void Start()
     {
+        FindPlayerPoint();
         currentState = idleState;
         currentState.EnterState(this);
     }
@@ -67,6 +62,7 @@ public class ArcherStateManager : MonoBehaviour
 
         if (rangeType == "Shoot")
         {
+            chaseRangeTrigger.SetActive(false);
             SwitchState(attackState);
         }
     }
@@ -77,6 +73,7 @@ public class ArcherStateManager : MonoBehaviour
 
         if (rangeType == "Shoot")
         {
+            chaseRangeTrigger.SetActive(true);
             SwitchState(chaseState);
         }
 
@@ -114,5 +111,18 @@ public class ArcherStateManager : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, obstacleLayer);
         return hit.collider == null;
+    }
+    
+    public void FindPlayerPoint()
+    {
+        if (!playerPointFound)
+        {
+            Transform point = PlayerPointsManager.Instance?.GetRandomPlayerPoint();
+            if (point != null)
+            {
+                lockedTarget = point;
+                playerPointFound = true;
+            }
+        }
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   itemID: 1
   itemName: Heal_Potion
   itemDesc: A potion that regains your health!
-  itemSprite: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 4981141a3a2aa2540b2605a5ba8fbd90, type: 3}

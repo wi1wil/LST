@@ -8,6 +8,7 @@ public class ArcherAttackState : ArcherBaseState
     public override void EnterState(ArcherStateManager archer)
     {
         archer.agent.isStopped = true;
+        archer.animator.SetBool("isChasing", false);
         archer.animator.SetBool("isAttacking", true);
 
         if (attackRoutine == null)

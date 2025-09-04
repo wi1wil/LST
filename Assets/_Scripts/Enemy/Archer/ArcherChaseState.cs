@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using NavMeshPlus.Extensions;
 
 public class ArcherChaseState : ArcherBaseState
 {
@@ -13,7 +11,7 @@ public class ArcherChaseState : ArcherBaseState
 
     public override void UpdateState(ArcherStateManager archer)
     {
-        if (archer.targetPlayer == null) return;
+        if (archer.lockedTarget == null) archer.FindPlayerPoint();
 
         archer.agent.SetDestination(archer.lockedTarget.position);
         archer.FlipSprite();
@@ -28,6 +26,8 @@ public class ArcherChaseState : ArcherBaseState
     {
         while (archer.agent.pathPending || archer.agent.remainingDistance > 0.1f)
         {
+            if(!(archer.currentState is ArcherChaseState)) yield break;
+
             archer.animator.SetBool("isChasing", true);
             yield return null;
         }
