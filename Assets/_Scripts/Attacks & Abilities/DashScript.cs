@@ -74,14 +74,14 @@ public class DashScript : MonoBehaviour
         {
             case 1:
                 isDashing = true;
-                rb.velocity = dashVelocity;
+                rb.linearVelocity = dashVelocity;
                 yield return new WaitForSeconds(0.2f);
                 isDashing = false;
                 break;
             case 2:
                 canDash = false;
                 isDashing = true;
-                rb.velocity = dashVelocity;
+                rb.linearVelocity = dashVelocity;
                 yield return new WaitForSeconds(0.2f);
                 StartCoroutine(StartCooldown());
                 isDashing = false;

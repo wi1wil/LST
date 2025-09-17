@@ -111,7 +111,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         Vector2 movementDir = movementInput.normalized;
-        rb.velocity = movementDir * speed;
+        rb.linearVelocity = movementDir * speed;
         if (movementDir.sqrMagnitude > 0.01f)
         {
             anim.SetBool("isRunning", true);

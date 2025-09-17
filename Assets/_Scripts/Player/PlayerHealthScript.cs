@@ -46,10 +46,10 @@ public class PlayerHealthScript : MonoBehaviour, IDamageable, Entity
     IEnumerator TakeKnockback(Vector2 knockbackDirection)
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockbackDirection * 2f, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
     }
 }
 

@@ -58,10 +58,10 @@ public class ArcherHealthScript : MonoBehaviour, IDamageable, Entity
     IEnumerator TakeKnockback(Vector2 knockbackDirection)
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
