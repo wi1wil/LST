@@ -40,7 +40,7 @@ public class ArcherAttackState : ArcherBaseState
         while (archer.targetPlayer != null && archer.currentState is ArcherAttackState)
         {
             archer.animator.SetBool("isAttacking", true);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.4f);
 
             GameObject arrow = Object.Instantiate(
                 archer.arrowPrefab,

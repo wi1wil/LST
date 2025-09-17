@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 165105415903268208}
   - component: {fileID: 6633539492019717240}
   - component: {fileID: 8598528656007289878}
+  - component: {fileID: 7419000695676004901}
   m_Layer: 6
   m_Name: Rock4
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,3 +121,19 @@ CircleCollider2D:
   m_Offset: {x: -0.01715374, y: -0.051460624}
   serializedVersion: 2
   m_Radius: 0.656929
+--- !u!114 &7419000695676004901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875401420826382348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

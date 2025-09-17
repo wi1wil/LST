@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Enemy
   - Environment
+  - Obstacle
+  - Env
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Obstacle
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -92,6 +92,7 @@ public class MapGenerator : MonoBehaviour
         halfH = height / 2;
 
         CreateTuple();
+        RegenerateMap();
     }
 
     void OnEnable()

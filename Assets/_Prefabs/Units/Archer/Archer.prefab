@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7827017955143713101}
   m_Layer: 0
   m_Name: Archer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,7 +542,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   playerPointFound: 0
   lockedTarget: {fileID: 0}
-  chaseRangeTrigger: {fileID: 0}
+  chaseRangeTrigger: {fileID: 4472378099625660706}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
