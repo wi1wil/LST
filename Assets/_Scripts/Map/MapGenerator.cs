@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -159,7 +160,6 @@ public class MapGenerator : MonoBehaviour
             }
         }
         RefreshDisplayMap();        
-        AddNavModToChildScript.AddBuildNavMesh();
     }
 
     public void GenerateEnvironment()
@@ -195,7 +195,19 @@ public class MapGenerator : MonoBehaviour
                 currentEnv = 0;
             }
         }
+        StartCoroutine(DelayedNavmeshRebuild());
+    }
+
+    private IEnumerator DelayedNavmeshRebuild()
+    {
+        yield return null;
+        NavMeshBuild();
+    }
+
+    public void NavMeshBuild()
+    {
         AddNavModToChildScript.AddModifiersToEnvironment();
+        AddNavModToChildScript.AddBuildNavMesh();
     }
 
     Vector3 RandomSpawnPos()

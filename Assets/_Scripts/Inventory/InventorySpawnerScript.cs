@@ -24,6 +24,7 @@ public class InventorySpawnerScript : MonoBehaviour
         }
     }
 
+    [ContextMenu("Update Inventory")]
     public void UpdateInventory(List<ItemStack> items)
     {
         foreach (var slot in slots)

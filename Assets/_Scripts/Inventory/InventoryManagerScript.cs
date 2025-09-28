@@ -80,14 +80,20 @@ public class InventoryManagerScript : MonoBehaviour
 
     public void FromSaveData(SaveData saveData)
     {
+        Debug.Log("Loading items from save data...");
         items.Clear();
         foreach (var saved in saveData.items)
         {
+            Debug.Log($"Trying to load {saved.itemID} x{saved.quantity}");
             ItemsSO itemSO = GetItemByID(saved.itemID);
             if (itemSO != null)
+            {
                 items.Add(new ItemStack(itemSO, saved.quantity));
+            }
             else
+            {
                 Debug.LogWarning($"Item ID {saved.itemID} not found in availableItems!");
+            }
         }
         inventorySpawner.UpdateInventory(items);
     }

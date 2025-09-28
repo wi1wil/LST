@@ -48,4 +48,19 @@ public class PlayerSaveScript : MonoBehaviour
             Debug.Log("No save file found, starting fresh.");
         }
     }
+
+    [ContextMenu("Delete Save File")]
+    public void DeleteSaveFile()
+    {
+        Debug.Log("Trying to delete save at: " + savePath);
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+            Debug.Log("Save file deleted.");
+        }
+        else
+        {
+            Debug.Log("No save file to delete at path: " + savePath);
+        }
+    }
 }

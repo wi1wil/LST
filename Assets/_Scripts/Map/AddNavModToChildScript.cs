@@ -22,7 +22,7 @@ public class AddNavModToChildScript : MonoBehaviour
             modifier.area = 1;
         }
 
-        var surface = GameObject.FindObjectOfType<NavMeshSurface>();
+        var surface = GameObject.FindFirstObjectByType<NavMeshSurface>();
         if (surface != null)
         {
             surface.BuildNavMesh();
@@ -32,7 +32,7 @@ public class AddNavModToChildScript : MonoBehaviour
     [MenuItem("Tools/Add Build NavMesh")]
     public static void AddBuildNavMesh()
     {
-        var surface = GameObject.FindObjectOfType<NavMeshSurface>();
+        var surface = GameObject.FindFirstObjectByType<NavMeshSurface>();
         if (surface != null)
         {
             surface.BuildNavMesh();
