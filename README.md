@@ -3,16 +3,16 @@
   <tr>
     <!-- Top large gif -->
     <td colspan="2" align="center">
-      <img src="https://github.com/wi1wil/LST/raw/main/vid3.gif" width="100%"/>
+      <img src="./Assets/ReadMe/vid3.gif" width="100%"/>
     </td>
   </tr>
   <tr>
     <!-- Bottom two gifs -->
     <td align="center" width="50%">
-      <img src="https://github.com/wi1wil/LST/raw/main/vid1.gif" width="100%"/>
+      <img src="./Assets/ReadMe/vid1.gif" width="100%"/>
     </td>
     <td align="center" width="50%">
-      <img src="https://github.com/wi1wil/LST/raw/main/vid2.gif" width="100%"/>
+      <img src="./Assets/ReadMe/vid2.gif" width="100%"/>
     </td>
   </tr>
 </table>
@@ -24,7 +24,7 @@
   <tr>
     <!-- Left Image -->
     <td width="30%" align="center" valign="middle" style="padding:15px;">
-      <img src="https://github.com/wi1wil/LST/raw/main/LST2.png" width="220"/>
+      <img src="./Assets/ReadMe/LST2.png" width="100%"/>
     </td>
     <!-- Right Text -->
     <td width="70%" valign="top" style="padding:15px;">
@@ -46,11 +46,7 @@
 <h2>💡 My Contributions</h2>
 <p>
 This project is fully developed as a <b>solo project</b>, where I was responsible for all of the 
-core mechanics and systems. These include the <b>fireball</b> and <b>icicle surge</b> abilities, 
-the <b>dash system</b> for fast mobility, enemy AI such as <b>archers with attack and chase states</b>, 
-and the <b>procedural map generation</b> that ensures every run feels unique. 
-I also integrated the <b>inventory system</b> to manage items during gameplay, making the 
-combat and progression loop more engaging.
+core mechanics and systems. Dedicated more than 16 hours (2 full work days) into learning development of the game.
 </p>
 
 ---
